@@ -7,7 +7,7 @@
 <script src="ScriptLoader.js"></script>
 <script> 
 
-var loader = (new scriptLoader({async: false}))
+var loader = (new scriptLoader({async: true}))
 loader.loadScripts(["one.js", "two.js","three.js"], 
 function(){
 	console.log("All script loaded" );

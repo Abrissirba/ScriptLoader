@@ -36,9 +36,22 @@ var scriptLoader = function(options){
 	_loadScriptsAsync = function(srcs, success, fail){
 		if(toString.call(srcs) === "[object Array]" && srcs.length > 0){
 			var idx = 0,
-			length = srcs.length;
+			length = srcs.length,
+			scripts = [];
 			for(;idx < length; idx += 1){
-				self.loadScript(srcs[idx], success, fail);
+				scripts.push(srcs[idx]);
+			}
+
+			for(idx = 0;idx < length; idx += 1){
+				self.loadScript(srcs[idx], 
+					function(src)
+					{
+						scripts.remove(src);
+						if(scripts.length === 0){
+							success && success();
+						}
+					}, 
+					fail);
 			}
 		}
 	};
@@ -66,4 +79,11 @@ var scriptLoader = function(options){
 			_loadScripts(srcs, success, fail);
 		}
 	};
+
+	Array.prototype.remove = function(element){
+		var index = this.indexOf(element);
+		if(index > -1){
+			this.splice(index, 1);
+		}
+	}
  };
