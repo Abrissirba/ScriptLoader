@@ -1,0 +1,23 @@
+{
+  "name": "Scriptloader",
+  "main": "Scriptloader.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Abrissirba/ScriptLoader",
+  "authors": [
+    "Marcus Abrahamsson <marcus.abrahamsson13@gmail.com>"
+  ],
+  "description": "A little library that load javscript async",
+  "keywords": [
+    "javascript",
+    "loading",
+    "async"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

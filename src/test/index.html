@@ -1,0 +1,20 @@
+<html>
+	<head>
+	</head>
+
+	<body>
+
+		<script src="src/scriptLoader.js"></script>
+		<script> 
+			var loader = (new scriptLoader({async: true}));
+			loader.loadScripts(["src/test/one.js?s=text", "src/test/two.js?s=text","src/test/three.js?s=text"], 
+				function(){
+					console.log("All script loaded" );
+				},
+				function(src){
+					console.log("Something went wrong" + src);
+				}
+			);
+		</script>
+	</body>
+</html>

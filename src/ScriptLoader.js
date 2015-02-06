@@ -1,6 +1,12 @@
 var scriptLoader = function(options){
- 	var self = this,
- 	async = (typeof options !== "undefined" && typeof options.async !== "undefined" && (options.async === "true" || options.async === true)) ? true : false,
+ 	var self = this;
+
+ 	self.toString = window.toString;
+ 	if(self.toString !== Object.prototype.toString){
+ 		self.toString = ({}).toString;
+ 	}
+
+ 	this.async = (typeof options !== "undefined" && typeof options.async !== "undefined" && (options.async === "true" || options.async === true)) ? true : false;
 
  	_loadScript = function (path, callback) {
 	    var script = document.createElement("script");
@@ -9,32 +15,38 @@ var scriptLoader = function(options){
 	    script.src = path;
 	    script.onload = script.onreadystatechange = function (event, isAbort) {
 	        if (!script.readyState || /loaded|complete/.test(script.readyState)) {
-	            if (isAbort)
-	                callback && callback("fail");
-	            else
-	                callback && callback("success");
+	            if (isAbort && callback){
+	                callback("fail");
+	            }
+	            else if(callback){
+	                callback("success");
+	            }
 	        }
 	    };
-	    script.onerror = function () { callback && callback("fail") };
+	    script.onerror = function () { 
+	    	if(callback){
+	    		callback("fail");
+	    	} 
+	    };
 	    (document.getElementsByTagName("head")[ 0 ]).appendChild( script );
-	},
+	};
 
 	_loadScripts = function(srcs, success, fail){
-		if(toString.call(srcs) === "[object Array]" && srcs.length > 0){
+		if(self.toString.call(srcs) === "[object Array]" && srcs.length > 0){
 			self.loadScript(srcs[0],
 				function(){
 					srcs.splice(0,1);
-	   				self.loadScripts(srcs, success, fail);
+	   				_loadScripts(srcs, success, fail);
 				},
 				fail);
 		}
-		else{
-			success && success();
+		else if(success){
+			success();
 		}
-	},
+	};
 
 	_loadScriptsAsync = function(srcs, success, fail){
-		if(toString.call(srcs) === "[object Array]" && srcs.length > 0){
+		if(self.toString.call(srcs) === "[object Array]" && srcs.length > 0){
 			var idx = 0,
 			length = srcs.length,
 			scripts = [];
@@ -42,16 +54,15 @@ var scriptLoader = function(options){
 				scripts.push(srcs[idx]);
 			}
 
+			var done = function(src){
+				scripts.remove(src);
+				if(scripts.length === 0 && success){
+					success();
+				}
+			};
+
 			for(idx = 0;idx < length; idx += 1){
-				self.loadScript(srcs[idx], 
-					function(src)
-					{
-						scripts.remove(src);
-						if(scripts.length === 0){
-							success && success();
-						}
-					}, 
-					fail);
+				self.loadScript(srcs[idx], done, fail);
 			}
 		}
 	};
@@ -60,11 +71,11 @@ var scriptLoader = function(options){
 		if(typeof src == 'string')
 		{
 			_loadScript(src, function(status){
-				if(status === "success"){
-					success && success(src);
+				if(status === "success" && success){
+					success(src);
 				}
-				else{
-					fail && fail(src);
+				else if(fail){
+					fail(src);
 				}
 
 			});
@@ -72,7 +83,7 @@ var scriptLoader = function(options){
 	};
 
 	this.loadScripts = function(srcs, success, fail){
-		if(async){
+		if(this.async){
 			_loadScriptsAsync(srcs, success, fail);
 		}
 		else{
@@ -85,5 +96,5 @@ var scriptLoader = function(options){
 		if(index > -1){
 			this.splice(index, 1);
 		}
-	}
+	};
  };
