@@ -66,7 +66,7 @@ describe("ScriptLoader load multiple files synchrounus", function() {
     var _src = [getFile("one", "test2"), getFile("two", "test2"), getFile("three", "test2")];
     _scriptLoader.loadScripts(_src,function(src){
       expect(test2).toBeDefined();
-      expect(test2).toEqual("onetwotghree");
+      expect(test2).toEqual("onetwothree");
       done();
     });
   });
