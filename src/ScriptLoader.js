@@ -1,8 +1,8 @@
 (function(window) {
     'use strict';
     
-    window.scriptLoader = function scriptLoader(options){
-        var self = this;
+    window.ScriptLoader = function ScriptLoader(options){
+        var self = this; 
         
         this.async = (options && options.async && (options.async === "true" || options.async === true)) ? true : false;
 
@@ -30,7 +30,7 @@
             };
             
             (document.getElementsByTagName("head")[0]).appendChild( script );
-        };
+        }
 
         // loads and array of sources synchronously
         function _loadScripts(srcs, success, fail){
@@ -43,8 +43,8 @@
             else if(success){
                 success();
             }
-        };
-
+        }
+ 
         // loads and array of sources asynchronously
         function _loadScriptsAsync(srcs, success, fail){
             if(toString.call(srcs) === "[object Array]" && srcs.length > 0){
@@ -65,7 +65,7 @@
                     self.loadScript(srcs[idx], done, fail);
                 }
             }
-        };
+        }
 
         this.loadScript = function loadScript(src, success, fail){
             if(typeof src == 'string')

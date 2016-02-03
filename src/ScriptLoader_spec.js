@@ -7,8 +7,8 @@ describe("ScriptLoader", function() {
   var _scriptLoaderAsync;
 
   beforeEach(function(){
-      _scriptLoader = new scriptLoader();
-      _scriptLoaderAsync = new scriptLoader({async: true});
+      _scriptLoader = new ScriptLoader();
+      _scriptLoaderAsync = new ScriptLoader({async: true});
   });
 
   it("should be defined", function() {
@@ -31,7 +31,7 @@ describe("ScriptLoader", function() {
 describe("ScriptLoader load one file", function() {
   var _scriptLoader;
   beforeEach(function(){
-      _scriptLoader = new scriptLoader();
+      _scriptLoader = new ScriptLoader();
   });
 
 
@@ -59,7 +59,7 @@ describe("ScriptLoader load multiple files synchrounus", function() {
   var _scriptLoader;
 
   beforeEach(function(){
-      _scriptLoader = new scriptLoader();
+      _scriptLoader = new ScriptLoader();
   });
 
   it("Load multiple scripts and check that the success callback is called", function(done) {
@@ -84,7 +84,7 @@ describe("ScriptLoader load multiple files asynchronus", function() {
   var _scriptLoader;
 
   beforeEach(function(){
-      _scriptLoader = new scriptLoader({async: true});
+      _scriptLoader = new ScriptLoader({async: true});
   });
 
   it("Load multiple scripts and check that the success callback is called", function(done) {

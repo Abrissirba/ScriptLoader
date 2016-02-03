@@ -1,7 +1,6 @@
 {
   "name": "abris-scriptloader",
   "main": "scriptloader.js",
-  "version": "0.0.1",
   "homepage": "https://github.com/Abrissirba/ScriptLoader",
   "authors": [
     "Marcus Abrahamsson <marcus.abrahamsson13@gmail.com>"

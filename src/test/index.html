@@ -6,7 +6,7 @@
 
 		<script src="scriptLoader.js"></script>
 		<script> 
-			var loader = (new scriptLoader({async: true}));
+			var loader = new ScriptLoader({async: true});
 			loader.loadScripts(["src/test/one.js?s=text", "src/test/two.js?s=text","src/test/three.js?s=text"], 
 				function(){
 					console.log("All script loaded" );
