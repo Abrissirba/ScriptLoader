@@ -1,6 +1,6 @@
 {
-  "name": "Scriptloader",
-  "main": "Scriptloader.js",
+  "name": "abris-scriptloader",
+  "main": "scriptloader.js",
   "version": "0.0.1",
   "homepage": "https://github.com/Abrissirba/ScriptLoader",
   "authors": [

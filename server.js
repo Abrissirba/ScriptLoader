@@ -19,8 +19,8 @@ app.get('/src/test/:file', function(req, res){
 	}, timeouts[req.params.file]);
 });
 
-app.use('/src', express.static(path.join(__dirname, '/src')));
-app.use(express.static("/fail", __dirname + '/fail'));
+app.use(express.static(__dirname + '/src'));
+app.use(express.static(__dirname + '/fail'));
 
 app.get('/', function(req, res, next){
 	res.send(fs.readFileSync("src/test/index.html", {encoding: 'utf8'}));

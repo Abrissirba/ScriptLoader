@@ -34,7 +34,7 @@ module.exports = function(grunt){
 				singleRun: true
 			},
 			during_watch: {
-				browsers: ['phantomJS']
+				browsers: ['Chrome']
 			},
 			build: {
 				browsers: ['Chrome', 'Firefox', 'IE']
