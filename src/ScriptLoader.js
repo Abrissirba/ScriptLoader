@@ -16,6 +16,7 @@
             // listen for when the script has finished downloading and call the callback
             script.onload = script.onreadystatechange = function (event) {
                 if (!script.readyState || /loaded|complete/.test(script.readyState)) {
+                    script.onreadystatechange = null;
                     if(callback){
                         callback("success");
                     }
@@ -55,7 +56,7 @@
                 }
 
                 var done = function(src){
-                    scripts.remove(src);
+                    removeFromArray(scripts, src);
                     if(scripts.length === 0 && success){
                         success();
                     }
@@ -98,11 +99,11 @@
         toString = ({}).toString;
     }
     
-    Array.prototype.remove = function(element){
-        var index = this.indexOf(element);
+    function removeFromArray(array, element){
+        var index = array.indexOf(element);
         if(index > -1){
             
-            this.splice(index, 1);
+            array.splice(index, 1);
         }
     };
 })(window);
